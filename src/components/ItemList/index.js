@@ -1,31 +1,37 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { /*connect,*/ useDispatch, useSelector } from 'react-redux';
 import { itemsFetchData } from '../../actions/items';
 
 function ItemList(props) {
+  const state = useSelector(state => state);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    props.fetchData('https://5826ed963900d612000138bd.mockapi.io/items');
+    const url = 'https://5826ed963900d612000138bd.mockapi.io/items'
+    dispatch(itemsFetchData(url));
+    // props.fetchData('https://5826ed963900d612000138bd.mockapi.io/items');
   }, []);
 
-  if (props.hasErrored) {
+  if (state.hasErrored) {
     return <p>Sorry! There was an error loading the items</p>;
   }
   
-  if (props.isLoading) {
+  if (state.isLoading) {
     return <p>Loading…</p>;
   }
-  
+  console.log("rederning");
   return (
     <ul style={{display: 'flex',
-      flexWrap: 'wrap'}}>
-        {props.items.map((item) => (
-            <li key={item.id} style={{background: 'whitesmoke', 
+                flexWrap: 'wrap'}}>
+        {state.items.map((item) => (
+            <li key={item.id} style={{background: 'aliceblue', 
                                       padding: '32px 0', 
                                       margin: 4, 
                                       display: 'inline-flex', 
                                       width: '9%', 
                                       justifyContent: 'center', 
-                                      alignItems: 'center'}}>
+                                      alignItems: 'center',
+                                      border: 4}}>
                 {item.label}
             </li>
         ))}
@@ -33,18 +39,22 @@ function ItemList(props) {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-      items: state.items,
-      hasErrored: state.itemsHasErrored,
-      isLoading: state.itemsIsLoading
-  };
-};
+// == useSelector hook
+// const mapStateToProps = (state) => {
+//   return {
+//       items: state.items,
+//       hasErrored: state.itemsHasErrored,
+//       isLoading: state.itemsIsLoading
+//   };
+// };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-      fetchData: (url) => dispatch(itemsFetchData(url))
-  };
-};
+// == useDispatch hook
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//       fetchData: (url) => dispatch(itemsFetchData(url))
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
+// export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
+
+export default ItemList;
