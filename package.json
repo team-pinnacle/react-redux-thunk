@@ -13,6 +13,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },
+  "homepage": "/build/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
