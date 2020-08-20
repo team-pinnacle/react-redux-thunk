@@ -16,9 +16,16 @@ function ItemList(props) {
   }
   
   return (
-    <ul>
+    <ul style={{display: 'flex',
+      flexWrap: 'wrap'}}>
         {props.items.map((item) => (
-            <li key={item.id}>
+            <li key={item.id} style={{background: 'whitesmoke', 
+                                      padding: '32px 0', 
+                                      margin: 4, 
+                                      display: 'inline-flex', 
+                                      width: '9%', 
+                                      justifyContent: 'center', 
+                                      alignItems: 'center'}}>
                 {item.label}
             </li>
         ))}
