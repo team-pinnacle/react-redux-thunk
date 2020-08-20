@@ -4,7 +4,7 @@ import { itemsFetchData } from '../../actions/items';
 
 function ItemList(props) {
   useEffect(() => {
-    props.fetchData('http://5826ed963900d612000138bd.mockapi.io/items');
+    props.fetchData('https://5826ed963900d612000138bd.mockapi.io/items');
   }, []);
 
   if (props.hasErrored) {
